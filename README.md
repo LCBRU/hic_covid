@@ -1,1 +1,1 @@
-# hic_covid
+# mysql_to_csv
