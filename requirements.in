@@ -1,2 +1,6 @@
 PyMySQL
 python-dotenv
+sqlalchemy
+sqlalchemy-migrate
+pyodbc
+requests

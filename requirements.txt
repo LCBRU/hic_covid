@@ -4,7 +4,37 @@
 #
 #    pip-compile
 #
+certifi==2021.10.8
+    # via requests
+charset-normalizer==2.0.12
+    # via requests
+decorator==5.1.1
+    # via sqlalchemy-migrate
+greenlet==1.1.2
+    # via sqlalchemy
+idna==3.3
+    # via requests
+pbr==5.8.1
+    # via sqlalchemy-migrate
 pymysql==1.0.2
+    # via -r requirements.in
+pyodbc==4.0.32
     # via -r requirements.in
 python-dotenv==0.19.2
     # via -r requirements.in
+requests==2.27.1
+    # via -r requirements.in
+six==1.16.0
+    # via sqlalchemy-migrate
+sqlalchemy==1.4.31
+    # via
+    #   -r requirements.in
+    #   sqlalchemy-migrate
+sqlalchemy-migrate==0.13.0
+    # via -r requirements.in
+sqlparse==0.4.2
+    # via sqlalchemy-migrate
+tempita==0.5.2
+    # via sqlalchemy-migrate
+urllib3==1.26.8
+    # via requests
