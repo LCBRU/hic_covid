@@ -12,7 +12,7 @@ def export(table_name):
         cur.execute(sql)
 
         with open(csv_file_path, 'w', newline='') as csvfile:
-            csvwriter = csv.writer(csvfile, delimiter=',', quotechar='"')
+            csvwriter = csv.writer(csvfile, delimiter='|', quotechar='"')
 
             csvwriter.writerow([d[0] for d in cur.description])
 
