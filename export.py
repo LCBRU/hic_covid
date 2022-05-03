@@ -1,39 +1,20 @@
-import csv
-from database import hic_cursor
+from refresh.administration import export_administration
+from refresh.bloods import export_bloods
+from refresh.demographics import export_demographics
+from refresh.diagnoses import export_diagnoses
+from refresh.emergency import export_emergency
+from refresh.episodes import export_episodes
+from refresh.icu_admissions import export_icu_admissions
+from refresh.icu_medication import export_icu_medication
+from refresh.icu_organsupport import export_icu_organsupport
 
 
-def export(table_name):
-    print(f'Exporting {table_name}')
-
-    sql = f'SELECT * FROM {table_name}'
-    csv_file_path = f'export/{table_name}.csv'
-
-    with hic_cursor() as cur:
-        cur.execute(sql)
-
-        with open(csv_file_path, 'w', newline='') as csvfile:
-            csvwriter = csv.writer(csvfile, delimiter='|', quotechar='"')
-
-            csvwriter.writerow([d[0] for d in cur.description])
-
-            for i, row in enumerate(cur.fetchall_unbuffered(), start=1):
-                if i % 1000 == 0:
-                    print(f'exporting record {i:,}')
-
-                csvwriter.writerow(row)
-
-
-export('demographics_export')
-export('administration_export')
-export('bloods_export')
-export('diagnosis_export')
-export('emergency_export')
-export('episode_export')
-export('icu_export')
-export('microbiology_export')
-export('movement_export')
-export('observations_export')
-export('order_export')
-export('prescribing_export')
-export('procedure_export')
-export('virology_export')
+# export_demographics()
+# export_administration()
+# export_bloods()
+# export_diagnoses()
+# export_emergency()
+# export_episodes()
+# export_icu_admissions()
+# export_icu_medication()
+export_icu_organsupport()

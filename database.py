@@ -1,3 +1,4 @@
+import pyodbc
 import pymysql
 from sqlalchemy import (
     create_engine,
@@ -7,6 +8,9 @@ from sqlalchemy.orm import sessionmaker
 from contextlib import contextmanager
 from sqlalchemy.ext.declarative import declarative_base
 from environment import (
+    HIC_HOST,
+    HIC_PASSWORD,
+    HIC_USERNAME,
     MS_SQL_UHL_DWH_HOST,
     MS_SQL_UHL_DWH_USER,
     MS_SQL_UHL_DWH_PASSWORD,
@@ -24,6 +28,34 @@ Base = declarative_base(metadata=hic_covid_meta)
 @contextmanager
 def uhl_dwh_databases_engine():
     connectionstring = f'mssql+pyodbc://{MS_SQL_UHL_DWH_USER}:{MS_SQL_UHL_DWH_PASSWORD}@{MS_SQL_UHL_DWH_HOST}/dwbriccs?driver={MS_SQL_ODBC_DRIVER.replace(" ", "+")}'
+    engine = create_engine(connectionstring)
+    yield engine
+    engine.dispose()
+
+
+def uhl_dwh_connection_string():
+    return f'DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={MS_SQL_UHL_DWH_HOST};DATABASE=dwbriccs;UID={MS_SQL_UHL_DWH_USER};PWD={MS_SQL_UHL_DWH_PASSWORD}'
+
+
+def hic_connection_string():
+    return f'DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={HIC_HOST};DATABASE=wh_hic_covid;UID={HIC_USERNAME};PWD={HIC_PASSWORD}'
+
+
+@contextmanager
+def uhl_dwh_conn():
+    with pyodbc.connect(uhl_dwh_connection_string()) as con:
+        yield con
+
+
+@contextmanager
+def hic_conn():
+    with pyodbc.connect(hic_connection_string()) as con:
+        yield con
+
+
+@contextmanager
+def hic_engine():
+    connectionstring = f'mssql+pyodbc://{HIC_USERNAME}:{HIC_PASSWORD}@{HIC_HOST}/wh_hic_covid?driver={MS_SQL_ODBC_DRIVER.replace(" ", "+")}'
     engine = create_engine(connectionstring)
     yield engine
     engine.dispose()
