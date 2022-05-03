@@ -1,19 +1,5 @@
 from database import hic_conn
-
-# Movements
-
-# brc_cv_covid_movements	subject	anonymised/pseudonymised patient identifier
-# brc_cv_covid_movements	spell_identifier	patient unique inpatient spell identifier
-# brc_cv_covid_movements	episode_identifier	patient unique episode identifier
-# brc_cv_covid_movements	ward_start_date_time	ward start date/time
-# brc_cv_covid_movements	ward_end_date_time	ward end date/time
-# brc_cv_covid_movements	ward_name	name code of the hospital ward
-# brc_cv_covid_movements	bed_name	Identifier for the bed in which the patient stayed
-# brc_cv_covid_movements	brc_name	data submitting brc name
-
-# Questions
-# Episode ID is not available for transfers
-# Bed does not seem to be widely recorded
+from refresh import export
 
 SQL_DROP_TABLE = '''
 	IF OBJECT_ID(N'dbo.transfer', N'U') IS NOT NULL
@@ -32,37 +18,11 @@ SQL_INSERT = '''
 		SET NOCOUNT ON;
 
         SELECT
-            a.ID as transfer_id,
-            'admission' AS transfer_type,
-            p.SYSTEM_NUMBER AS uhl_system_number,
-            a.id as spell_identifier,
-            NULL AS episode_identifier,
-            a.admission_datetime AS ward_start_date_time,
-            ward.WARD AS ward_name,
-            NULL AS bed_name
-        FROM DWREPO.dbo.PATIENT p
-        JOIN DWREPO.dbo.ADMISSIONS a
-            ON a.PATIENT_ID = p.ID
-        LEFT JOIN DWREPO.dbo.MF_WARD ward
-            ON ward.CODE = a.ward_code
-            AND ward.LOGICALLY_DELETED_FLAG = 0
-        LEFT JOIN DWREPO.dbo.MF_HOSPITAL hospital
-            ON hospital.CODE = a.HOSPITAL_CODE
-            AND hospital.LOGICALLY_DELETED_FLAG = 0
-        WHERE p.SYSTEM_NUMBER IN (
-            SELECT UHL_System_Number
-            FROM DWBRICCS.dbo.all_suspected_covid
-        ) AND a.ADMISSION_DATE_TIME > '01-Jan-2020'
-
-        UNION ALL
-
-        SELECT
-            t.ID as transfer_id,
-            'transfer' AS transfer_type,
             p.SYSTEM_NUMBER AS uhl_system_number,
             a.id as spell_identifier,
             NULL AS episode_identifier,
             t.TRANSFER_DATE_TIME AS ward_start_date_time,
+            t.TRANSFER_END_DATE_TIME AS ward_end_date_time,
             ward.WARD AS ward_name,
             t.to_bed AS bed_name
         FROM DWREPO.dbo.PATIENT p
@@ -80,31 +40,7 @@ SQL_INSERT = '''
             SELECT UHL_System_Number
             FROM DWBRICCS.dbo.all_suspected_covid
         ) AND a.ADMISSION_DATE_TIME > '01-Jan-2020'
-
-        UNION ALL
-        
-        SELECT
-            a.ID as transfer_id,
-            'discharge' AS transfer_type,
-            p.SYSTEM_NUMBER AS uhl_system_number,
-            a.id as spell_identifier,
-            NULL AS episode_identifier,
-            a.discharge_date_time AS ward_start_date_time,
-            ward.WARD AS ward_name,
-            NULL AS bed_name
-        FROM DWREPO.dbo.PATIENT p
-        JOIN DWREPO.dbo.ADMISSIONS a
-            ON a.PATIENT_ID = p.ID
-        LEFT JOIN DWREPO.dbo.MF_WARD ward
-            ON ward.CODE = a.discharge_ward
-            AND ward.LOGICALLY_DELETED_FLAG = 0
-        LEFT JOIN DWREPO.dbo.MF_HOSPITAL hospital
-            ON hospital.CODE = a.discharge_hospital
-            AND hospital.LOGICALLY_DELETED_FLAG = 0
-        WHERE p.SYSTEM_NUMBER IN (
-            SELECT UHL_System_Number
-            FROM DWBRICCS.dbo.all_suspected_covid
-        ) AND a.ADMISSION_DATE_TIME > '01-Jan-2020'
+        ORDER BY p.SYSTEM_NUMBER, t.TRANSFER_DATE_TIME
         ;
 	");
 
@@ -131,3 +67,43 @@ def refresh_transfer():
 		con.execute(SQL_INDEXES)
 
 	print('refresh_transfer: ended')
+
+
+# Movements
+
+# brc_cv_covid_movements	subject	anonymised/pseudonymised patient identifier
+# brc_cv_covid_movements	spell_identifier	patient unique inpatient spell identifier
+# brc_cv_covid_movements	episode_identifier	patient unique episode identifier
+# brc_cv_covid_movements	ward_start_date_time	ward start date/time
+# brc_cv_covid_movements	ward_end_date_time	ward end date/time
+# brc_cv_covid_movements	ward_name	name code of the hospital ward
+# brc_cv_covid_movements	bed_name	Identifier for the bed in which the patient stayed
+# brc_cv_covid_movements	brc_name	data submitting brc name
+
+# Questions
+# Episode ID is not available for transfers
+# Bed does not seem to be widely recorded
+
+
+SQL_SELECT_EXPORT = '''
+    SELECT
+        p.participant_identifier AS subject,
+        a.spell_identifier,
+        a.episode_identifier,
+        a.ward_start_date_time,
+        a.ward_end_date_time,
+        a.ward_name,
+        a.bed_name
+    FROM transfer a
+    JOIN participant p
+        ON p.uhl_system_number = a.uhl_system_number
+    WHERE   a.uhl_system_number IN (
+                SELECT  DISTINCT e_.uhl_system_number
+                FROM    episodes e_
+                WHERE   e_.admission_date_time <= '20210630'
+            )
+    ;
+'''
+
+def export_transfer():
+	export('transfer', SQL_SELECT_EXPORT)

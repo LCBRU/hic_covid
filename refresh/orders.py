@@ -1,13 +1,5 @@
 from database import hic_conn
-
-# brc_cv_covid_orders	subject	anonymised/pseudonymised patient identifier
-# brc_cv_covid_orders	order_id	anonymised/pseudonymised unique numeric local order identifier
-# brc_cv_covid_orders	order_type	local pas order type
-# brc_cv_covid_orders	order_description	local order name
-# brc_cv_covid_orders	order_date_time	date/time of order
-# brc_cv_covid_orders	brc_name	data submitting brc name
-
-# Done
+from refresh import export
 
 SQL_DROP_TABLE = '''
 	IF OBJECT_ID(N'dbo.orders', N'U') IS NOT NULL
@@ -75,3 +67,34 @@ def refresh_orders():
 		con.execute(SQL_INDEXES)
 
 	print('refresh_orders: ended')
+
+
+# brc_cv_covid_orders	subject	anonymised/pseudonymised patient identifier
+# brc_cv_covid_orders	order_id	anonymised/pseudonymised unique numeric local order identifier
+# brc_cv_covid_orders	order_type	local pas order type
+# brc_cv_covid_orders	order_description	local order name
+# brc_cv_covid_orders	order_date_time	date/time of order
+# brc_cv_covid_orders	brc_name	data submitting brc name
+
+# Done
+
+SQL_SELECT_EXPORT = '''
+    SELECT
+        p.participant_identifier AS subject,
+        a.order_id,
+        a.order_type,
+        a.order_description,
+        a.order_date_time
+    FROM orders a
+    JOIN participant p
+        ON p.uhl_system_number = a.uhl_system_number
+    WHERE   a.uhl_system_number IN (
+                SELECT  DISTINCT e_.uhl_system_number
+                FROM    episodes e_
+                WHERE   e_.admission_date_time <= '20210630'
+            )
+    ;
+'''
+
+def export_orders():
+	export('orders', SQL_SELECT_EXPORT)

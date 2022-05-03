@@ -1,16 +1,5 @@
 from database import hic_conn, uhl_dwh_databases_engine
-
-# brc_cv_covid_vitalsigns	subject	anonymised/pseudonymised patient identifier
-# brc_cv_covid_vitalsigns	observation_code	observation code
-# brc_cv_covid_vitalsigns	observation_name	observation name description
-# brc_cv_covid_vitalsigns	observation_datetime	date/time of observation
-# brc_cv_covid_vitalsigns	observation_start_datetime	date/time of observation started
-# brc_cv_covid_vitalsigns	observation_end_datetime	date/time of observation ended
-# brc_cv_covid_vitalsigns	observation_result	observation result text both numeric and textual results type
-# brc_cv_covid_vitalsigns	observation_unit	observation units
-# brc_cv_covid_vitalsigns	brc_name	data submitting brc name
-
-# Done
+from refresh import export
 
 SQL_OBSERVATION_ROWS = '''
 	SELECT TOP 1 *
@@ -118,3 +107,41 @@ def chunks(lst, n):
     """Yield successive n-sized chunks from lst."""
     for i in range(0, len(lst), n):
         yield lst[i:i + n]
+
+
+# brc_cv_covid_vitalsigns	subject	anonymised/pseudonymised patient identifier
+# brc_cv_covid_vitalsigns	observation_code	observation code
+# brc_cv_covid_vitalsigns	observation_name	observation name description
+# brc_cv_covid_vitalsigns	observation_datetime	date/time of observation
+# brc_cv_covid_vitalsigns	observation_start_datetime	date/time of observation started
+# brc_cv_covid_vitalsigns	observation_end_datetime	date/time of observation ended
+# brc_cv_covid_vitalsigns	observation_result	observation result text both numeric and textual results type
+# brc_cv_covid_vitalsigns	observation_unit	observation units
+# brc_cv_covid_vitalsigns	brc_name	data submitting brc name
+
+# Done
+
+SQL_SELECT_EXPORT = '''
+    SELECT
+        p.participant_identifier AS subject,
+        a.observation_code,
+        a.observation_name,
+        a.observation_datetime,
+        a.observation_start_datetime,
+        a.observation_end_datetime,
+		a.observation_result,
+		a.observation_unit
+    FROM observations a
+    JOIN participant p
+        ON p.uhl_system_number = a.uhl_system_number
+    WHERE   a.uhl_system_number IN (
+                SELECT  DISTINCT e_.uhl_system_number
+                FROM    episodes e_
+                WHERE   e_.admission_date_time <= '20210630'
+            )
+    ;
+'''
+
+def export_observations():
+	export('observations', SQL_SELECT_EXPORT)
+

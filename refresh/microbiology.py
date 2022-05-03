@@ -1,12 +1,5 @@
 from database import hic_conn
-
-# brc_cv_covid_microbiology	subject	anonymised/pseudonymised patient identifier
-# brc_cv_covid_microbiology	order_code	local laboratory order code
-# brc_cv_covid_microbiology	collection_date_time	date/time microbiology collection
-# brc_cv_covid_microbiology	site	body location sample was taken from
-# brc_cv_covid_microbiology	organism_or_bug	organisms/bug tested for
-# brc_cv_covid_microbiology	sensitivity	results of the test
-# brc_cv_covid_microbiology	brc_name	data submitting brc name
+from refresh import export
 
 SQL_DROP_TABLE = '''
 	IF OBJECT_ID(N'dbo.microbiology_test', N'U') IS NOT NULL
@@ -85,3 +78,34 @@ def refresh_microbiology():
 		con.execute(SQL_INDEXES)
 
 	print('refresh_microbiology: ended')
+
+
+# brc_cv_covid_microbiology	subject	anonymised/pseudonymised patient identifier
+# brc_cv_covid_microbiology	order_code	local laboratory order code
+# brc_cv_covid_microbiology	collection_date_time	date/time microbiology collection
+# brc_cv_covid_microbiology	site	body location sample was taken from
+# brc_cv_covid_microbiology	organism_or_bug	organisms/bug tested for
+# brc_cv_covid_microbiology	sensitivity	results of the test
+# brc_cv_covid_microbiology	brc_name	data submitting brc name
+
+SQL_SELECT_EXPORT = '''
+    SELECT
+        p.participant_identifier AS subject,
+        a.order_code,
+        a.collection_date_time,
+        a.site,
+        a.organism_or_bug,
+        a.sensitivity
+    FROM microbiology_test a
+    JOIN participant p
+        ON p.uhl_system_number = a.uhl_system_number
+    WHERE   a.uhl_system_number IN (
+                SELECT  DISTINCT e_.uhl_system_number
+                FROM    episodes e_
+                WHERE   e_.admission_date_time <= '20210630'
+            )
+    ;
+'''
+
+def export_microbiology():
+	export('microbiology', SQL_SELECT_EXPORT)

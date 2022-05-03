@@ -1,16 +1,5 @@
 from database import hic_conn
-
-# brc_cv_covid_virology	subject	anonymised/pseudonymised patient identifier
-# brc_cv_covid_virology	laboratory_department	local laboratory type
-# brc_cv_covid_virology	order_name	local laboratory order name
-# brc_cv_covid_virology	test_name	local pathology test name
-# brc_cv_covid_virology	test_result	result of the laboratory test
-# brc_cv_covid_virology	test_result_unit	unit for results
-# brc_cv_covid_virology	result_flag	local flag indicating high/low result
-# brc_cv_covid_virology	sample_collected_date_time	date/time sample collected
-# brc_cv_covid_virology	sample_received_date_time	date/time sample received
-# brc_cv_covid_virology	result_available_date_time	date/time result available
-# brc_cv_covid_virology	brc_name	data submitting brc name
+from refresh import export
 
 SQL_DROP_TABLE = '''
 	IF OBJECT_ID(N'dbo.virology', N'U') IS NOT NULL
@@ -92,3 +81,42 @@ def refresh_virology():
 		con.execute(SQL_INDEXES)
 
 	print('refresh_virology: ended')
+
+
+# brc_cv_covid_virology	subject	anonymised/pseudonymised patient identifier
+# brc_cv_covid_virology	laboratory_department	local laboratory type
+# brc_cv_covid_virology	order_name	local laboratory order name
+# brc_cv_covid_virology	test_name	local pathology test name
+# brc_cv_covid_virology	test_result	result of the laboratory test
+# brc_cv_covid_virology	test_result_unit	unit for results
+# brc_cv_covid_virology	result_flag	local flag indicating high/low result
+# brc_cv_covid_virology	sample_collected_date_time	date/time sample collected
+# brc_cv_covid_virology	sample_received_date_time	date/time sample received
+# brc_cv_covid_virology	result_available_date_time	date/time result available
+# brc_cv_covid_virology	brc_name	data submitting brc name
+
+SQL_SELECT_EXPORT = '''
+    SELECT
+        p.participant_identifier AS subject,
+        a.laboratory_department,
+        a.order_name,
+        a.test_name,
+        a.test_result,
+        a.test_result_unit,
+        a.result_flag,
+        a.sample_collected_date_time,
+        a.sample_received_date_time,
+        a.result_available_date_time
+    FROM virology a
+    JOIN participant p
+        ON p.uhl_system_number = a.uhl_system_number
+    WHERE   a.uhl_system_number IN (
+                SELECT  DISTINCT e_.uhl_system_number
+                FROM    episodes e_
+                WHERE   e_.admission_date_time <= '20210630'
+            )
+    ;
+'''
+
+def export_virology():
+	export('virology', SQL_SELECT_EXPORT)

@@ -1,17 +1,5 @@
 from database import hic_conn
-
-# brc_cv_covid_episodes_procedures	subject	anonymised/pseudonymised patient identifier
-# brc_cv_covid_episodes_procedures	spell_identifier	patient unique inpatient spell identifier
-# brc_cv_covid_episodes_procedures	episode_identifier	patient unique inpatient episode identifier
-# brc_cv_covid_episodes_procedures	procedure_position	inpatient procedure code sequence
-# brc_cv_covid_episodes_procedures	procedure_code_opcs	inpatient procedure code opcs
-# brc_cv_covid_episodes_procedures	procedure_name_opcs	inpatient procedure description opcs
-# brc_cv_covid_episodes_procedures	procedure_code_snomed	inpatient procedure code snomed ct
-# brc_cv_covid_episodes_procedures	procedure_name_snomed	inpatient procedure description snomed ct
-# brc_cv_covid_episodes_procedures	brc_name	data submitting brc name
-
-# Questions
-# 1. Do not have SNOMED CT coding
+from refresh import export
 
 SQL_DROP_TABLE = '''
 	IF OBJECT_ID(N'dbo.procedures', N'U') IS NOT NULL
@@ -77,3 +65,41 @@ def refresh_procedures():
 		con.execute(SQL_INDEXES)
 
 	print('refresh_procedures: ended')
+
+
+# brc_cv_covid_episodes_procedures	subject	anonymised/pseudonymised patient identifier
+# brc_cv_covid_episodes_procedures	spell_identifier	patient unique inpatient spell identifier
+# brc_cv_covid_episodes_procedures	episode_identifier	patient unique inpatient episode identifier
+# brc_cv_covid_episodes_procedures	procedure_position	inpatient procedure code sequence
+# brc_cv_covid_episodes_procedures	procedure_code_opcs	inpatient procedure code opcs
+# brc_cv_covid_episodes_procedures	procedure_name_opcs	inpatient procedure description opcs
+# brc_cv_covid_episodes_procedures	procedure_code_snomed	inpatient procedure code snomed ct
+# brc_cv_covid_episodes_procedures	procedure_name_snomed	inpatient procedure description snomed ct
+# brc_cv_covid_episodes_procedures	brc_name	data submitting brc name
+
+# Questions
+# 1. Do not have SNOMED CT coding
+
+SQL_SELECT_EXPORT = '''
+    SELECT
+        p.participant_identifier AS subject,
+        a.spell_identifier,
+        a.episode_identifier,
+        a.procedure_position,
+        a.procedure_code_opcs,
+        a.procedure_name_opcs,
+        a.procedure_code_snomed,
+        a.procedure_name_snomed
+    FROM procedures a
+    JOIN participant p
+        ON p.uhl_system_number = a.uhl_system_number
+    WHERE   a.uhl_system_number IN (
+                SELECT  DISTINCT e_.uhl_system_number
+                FROM    episodes e_
+                WHERE   e_.admission_date_time <= '20210630'
+            )
+    ;
+'''
+
+def export_procedures():
+	export('procedures', SQL_SELECT_EXPORT)

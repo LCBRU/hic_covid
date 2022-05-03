@@ -129,22 +129,11 @@ SQL_SELECT_EXPORT = '''
     SELECT
         p.participant_identifier AS subject,
         a.icu_encounter_identifier,
-        a.admission_ward,
-        a.wardstaydate,
-        a.hospital_admission_datetime,
-        a.hospital_discharge_datetime,
-        a.level_2,
-        a.level_3,
-        a.basic_cardiovascular_support_day,
-        a.advanced_cardiovascular_support_day,
-        a.basic_respiratory_support_day,
-        a.advanced_respiratory_support_day,
-        a.renal_support_day,
-        a.neurological_support_day,
-        a.dermatological_support_day,
-        a.liver_support_day,
-        a.gastrointestinal_support_day
-    FROM icu_organsupport a
+        a.procedure_datetime,
+        a.procedure_type,
+        a.procedure_desc,
+        a.icu_ward
+    FROM icu_procedures a
     JOIN participant p
         ON p.uhl_system_number = a.uhl_system_number
     WHERE   a.uhl_system_number IN (

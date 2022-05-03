@@ -1,58 +1,5 @@
 from database import hic_conn
-
-# brc_cv_covid_pharmacy_prescribing	subject	anonymised/pseudonymised patient identifier	
-# brc_cv_covid_pharmacy_prescribing	prescription_order_id	laboratory order id for the prescription	
-# brc_cv_covid_pharmacy_prescribing	order_date_time	date/time order prescribed	
-# brc_cv_covid_pharmacy_prescribing	prescription_type	type of prescription	Enumerator
-	# At home
-	# Compliance box (Dosett)
-	# Dietetic Product
-	# DischargeMeds
-	# Dispense at discharge
-	# Fill Later
-	# FP10 (please write)
-	# home medication
-	# Inpatient
-	# Medications on Admission
-	# Non-urgent medication (GP to prescribe)
-	# Normal
-	# Normal Order
-	# Not Set
-	# Nurse / Midwife dispensing Pre-pack 
-	# Obtain from Clinic/ Other hospital
-	# Obtain from drug advisory service
-	# On Admission
-	# On Ward - DFD supply
-	# On Ward - Patient's own supply
-	# Patient declined
-	# Patient to buy in community (OTC)
-	# Patient's own supply
-	# Prescription / Discharge Order
-	# Print
-	# Recorded / Home Meds
-	# Relabel
-	# satellite (normally ambulatory care)
-	# Satellite (Super Bill) Meds  
-	# Sufficient supply at home 
-	# Supplied during admission
-	# to take out discharge
-	# Urgent/Complex medication (UCLH to dispense)
-	# Ward pre-pack
-# brc_cv_covid_pharmacy_prescribing	therapeutical_class	drug class	
-# brc_cv_covid_pharmacy_prescribing	medication_name	name of the medication	
-# brc_cv_covid_pharmacy_prescribing	ordered_dose	prescribed dosage	
-# brc_cv_covid_pharmacy_prescribing	ordered_frequency	prescribed frequency of medication	
-# brc_cv_covid_pharmacy_prescribing	ordered_drug_form	order drug form	
-# brc_cv_covid_pharmacy_prescribing	ordered_unit	no of units prescribed	
-# brc_cv_covid_pharmacy_prescribing	ordered_route	prescribed route	
-# brc_cv_covid_pharmacy_prescribing	admission_medicine_y_n	patient admitted on this drug	
-# brc_cv_covid_pharmacy_prescribing	gp_to_continue	gp to continue after patient discharge	
-# brc_cv_covid_pharmacy_prescribing	brc_name	data submitting brc name	
-
-
-# Questions
-# 1. Do not have admission_medicine_y_n
-# 2. Do not have gp_to_continue
+from refresh import export
 
 SQL_DROP_TABLE = '''
 	IF OBJECT_ID(N'dbo.prescribing', N'U') IS NOT NULL
@@ -135,3 +82,87 @@ def refresh_prescribing():
 		con.execute(SQL_INDEXES)
 
 	print('refresh_prescribing: ended')
+
+
+# brc_cv_covid_pharmacy_prescribing	subject	anonymised/pseudonymised patient identifier	
+# brc_cv_covid_pharmacy_prescribing	prescription_order_id	laboratory order id for the prescription	
+# brc_cv_covid_pharmacy_prescribing	order_date_time	date/time order prescribed	
+# brc_cv_covid_pharmacy_prescribing	prescription_type	type of prescription	Enumerator
+	# At home
+	# Compliance box (Dosett)
+	# Dietetic Product
+	# DischargeMeds
+	# Dispense at discharge
+	# Fill Later
+	# FP10 (please write)
+	# home medication
+	# Inpatient
+	# Medications on Admission
+	# Non-urgent medication (GP to prescribe)
+	# Normal
+	# Normal Order
+	# Not Set
+	# Nurse / Midwife dispensing Pre-pack 
+	# Obtain from Clinic/ Other hospital
+	# Obtain from drug advisory service
+	# On Admission
+	# On Ward - DFD supply
+	# On Ward - Patient's own supply
+	# Patient declined
+	# Patient to buy in community (OTC)
+	# Patient's own supply
+	# Prescription / Discharge Order
+	# Print
+	# Recorded / Home Meds
+	# Relabel
+	# satellite (normally ambulatory care)
+	# Satellite (Super Bill) Meds  
+	# Sufficient supply at home 
+	# Supplied during admission
+	# to take out discharge
+	# Urgent/Complex medication (UCLH to dispense)
+	# Ward pre-pack
+# brc_cv_covid_pharmacy_prescribing	therapeutical_class	drug class	
+# brc_cv_covid_pharmacy_prescribing	medication_name	name of the medication	
+# brc_cv_covid_pharmacy_prescribing	ordered_dose	prescribed dosage	
+# brc_cv_covid_pharmacy_prescribing	ordered_frequency	prescribed frequency of medication	
+# brc_cv_covid_pharmacy_prescribing	ordered_drug_form	order drug form	
+# brc_cv_covid_pharmacy_prescribing	ordered_unit	no of units prescribed	
+# brc_cv_covid_pharmacy_prescribing	ordered_route	prescribed route	
+# brc_cv_covid_pharmacy_prescribing	admission_medicine_y_n	patient admitted on this drug	
+# brc_cv_covid_pharmacy_prescribing	gp_to_continue	gp to continue after patient discharge	
+# brc_cv_covid_pharmacy_prescribing	brc_name	data submitting brc name	
+
+
+# Questions
+# 1. Do not have admission_medicine_y_n
+# 2. Do not have gp_to_continue
+
+SQL_SELECT_EXPORT = '''
+    SELECT
+        p.participant_identifier AS subject,
+        a.prescription_order_id,
+        a.order_date_time,
+        a.prescription_type,
+        a.therapeutical_class,
+        a.medication_name,
+		a.ordered_dose,
+		a.ordered_frequency,
+		a.ordered_drug_form,
+		a.ordered_unit,
+		a.ordered_route,
+		a.admission_medicine_y_n,
+		a.gp_to_continue
+    FROM prescribing a
+    JOIN participant p
+        ON p.uhl_system_number = a.uhl_system_number
+    WHERE   a.uhl_system_number IN (
+                SELECT  DISTINCT e_.uhl_system_number
+                FROM    episodes e_
+                WHERE   e_.admission_date_time <= '20210630'
+            )
+    ;
+'''
+
+def export_prescribing():
+	export('prescribing', SQL_SELECT_EXPORT)
