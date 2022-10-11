@@ -1,8 +1,47 @@
 import requests
 from urllib.parse import urlencode, urlparse, urlunparse
-from database import hic_conn
+from database import hic_conn, uhl_dwh_conn
 from environment import IDENTITY_API_KEY, IDENTITY_HOST
 from refresh import export
+
+SQL_CREATE_TEMP_TABLE = '''
+    SET NOCOUNT ON;
+
+	SELECT DISTINCT
+        p.SYSTEM_NUMBER AS uhl_system_number,
+        LAST_VALUE(d.WHO_DIAGNOSIS_CODE)
+			OVER(
+				PARTITION BY p.SYSTEM_NUMBER
+				ORDER BY d.DIAGNOSIS_DATE, d.DIAGNOSIS_NUMBER, d.WHO_DIAGNOSIS_CODE
+				ROWS BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING
+			) recent_smoking_status
+	INTO temp_hic_smoking
+    FROM DWREPO.dbo.PATIENT p
+    JOIN DWREPO.dbo.ADMISSIONS a
+        ON a.PATIENT_ID = p.ID
+    JOIN DWREPO.dbo.CONSULTANT_EPISODES ce
+        ON ce.ADMISSIONS_ID = a.ID
+    JOIN DWREPO.dbo.DIAGNOSES d
+        ON d.CONSULTANT_EPISODES_ID = ce.ID
+    WHERE p.SYSTEM_NUMBER IN (
+        SELECT UHL_System_Number
+        FROM DWBRICCS.dbo.all_suspected_covid
+    ) AND a.ADMISSION_DATE_TIME > '2020-01-01'
+    AND d.WHO_DIAGNOSIS_CODE IN ('F17', 'F17.0', 'F17.1', 'F17.2', 'F17.3', 'F17.4', 'F17.7', 'F17.9', 'T65.2', 'Z72.0')
+	AND p.SYSTEM_NUMBER IS NOT NULL
+    ;
+
+	CREATE INDEX temp_hic_smoking_uhl_system_number on temp_hic_smoking (uhl_system_number);
+
+'''
+
+SQL_CLEAN_UP = '''
+	IF OBJECT_ID(N'temp_hic_smoking', N'U') IS NOT NULL
+		BEGIN
+			DROP TABLE dwbriccs.dbo.temp_hic_smoking;
+		END;
+'''
+
 
 SQL_DROP_TABLE = '''
 	IF OBJECT_ID(N'dbo.demographics', N'U') IS NOT NULL
@@ -19,6 +58,7 @@ SQL_INSERT = '''
 	FROM OPENQUERY(
 		uhldwh, "
 		SET NOCOUNT ON;
+
         SELECT
             cv.uhl_system_number AS uhl_system_number,
             CASE p.Sex
@@ -37,13 +77,15 @@ SQL_INSERT = '''
             p.DATE_OF_DEATH AS death_date,
             p.ETHNIC_ORIGIN_CODE ethnicity,
             eo.ethnic_origin AS ethnicity_desc,
-			NULL AS Smoking_status,
+			s.recent_smoking_status AS Smoking_status,
 			NULL AS BMI,
             p.Post_Code AS postcode,
             pc.IMD_DECILE AS IMD_Decile
         FROM DWBRICCS.dbo.all_suspected_covid cv
         JOIN DWREPO.dbo.PATIENT p
             ON p.SYSTEM_NUMBER = cv.uhl_system_number
+		JOIN dwbriccs.dbo.temp_hic_smoking s
+			ON s.uhl_system_number = cv.uhl_system_number
         LEFT JOIN DWREPO_BASE.dbo.MF_POSTCODE_REFERENCE_WHO pc
             ON pc.UNIT_POSTCODE = p.Post_Code
         LEFT JOIN DWREPO.dbo.MF_ETHNIC_ORIGIN eo
@@ -57,7 +99,8 @@ SQL_INSERT = '''
             p.ETHNIC_ORIGIN_CODE,
             eo.ethnic_origin,
             p.Post_Code,
-            pc.IMD_DECILE
+            pc.IMD_DECILE,
+			s.recent_smoking_status
         ;
 	");
 	SET QUOTED_IDENTIFIER ON;
@@ -84,6 +127,14 @@ SQL_SELECT_MISSING_PARTICIPANT_IDS = '''
 def refresh_demographics():
 	print('refresh_demographics: started')
 
+	print('refresh_demographics: extract smoking status')
+
+	with uhl_dwh_conn() as con:
+		con.execute(SQL_CLEAN_UP)
+		con.execute(SQL_CREATE_TEMP_TABLE)
+
+	print('refresh_demographics: extract demographics')
+
 	with hic_conn() as con:
 		con.execute(SQL_DROP_TABLE)
 		con.execute(SQL_INSERT)
@@ -103,6 +154,9 @@ def refresh_demographics():
 			)
 
 			cur.commit()
+
+	with uhl_dwh_conn() as con:
+		con.execute(SQL_CLEAN_UP)
 
 	print('refresh_demographics: ended')
 

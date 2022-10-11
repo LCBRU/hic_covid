@@ -35,9 +35,9 @@ SQL_INSERT = '''
             p.SYSTEM_NUMBER AS uhl_system_number,
             a.id AS spell_identifier,
             ce.ID AS episode_identifier,
-            d.row_created AS diagnosis_date_time,
+            d.DIAGNOSIS_DATE AS diagnosis_date_time,
             d.DIAGNOSIS_NUMBER AS diagnosis_position,
-            d.DIAGNOSIS_CODE AS diagnosis_code_icd,
+            d.WHO_DIAGNOSIS_CODE AS diagnosis_code_icd,
             mf_d.DIAGNOSIS_DESCRIPTION AS diagnosis_description_icd,
             NULL AS diagnosis_code_snomed,
             NULL AS diagnosis_description_snomed

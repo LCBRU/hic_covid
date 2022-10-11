@@ -13,6 +13,7 @@ from refresh.observations import export_observations
 from refresh.orders import export_orders
 from refresh.prescribing import export_prescribing
 from refresh.procedures import export_procedures
+from refresh.risk_factors import export_riskfactors
 from refresh.transfers import export_transfer
 from refresh.virology import export_virology
 
@@ -34,3 +35,4 @@ export_prescribing()
 export_procedures()
 export_transfer()
 export_virology()
+export_riskfactors()

@@ -81,7 +81,6 @@ def refresh_observations():
 
 			print(f'Executing chunk {i}')
 
-			print(q)
 			con.execute(q)
 
 		con.execute(SQL_INDEXES)

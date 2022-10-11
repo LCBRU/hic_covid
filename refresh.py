@@ -13,24 +13,25 @@ from refresh.observations import refresh_observations
 from refresh.orders import refresh_orders
 from refresh.prescribing import refresh_prescribing
 from refresh.procedures import refresh_procedures
+from refresh.risk_factors import refresh_riskfactors
 from refresh.transfers import refresh_transfer
 from refresh.virology import refresh_virology
 
-# refresh_demographics()
-# refresh_bloods()
-# refresh_virology()
-# refresh_orders()
-# refresh_observations()
-# refresh_administration()
-# refresh_prescribing()
-# refresh_microbiology()
+refresh_demographics()
+refresh_bloods()
+refresh_virology()
+refresh_orders()
+refresh_observations()
+refresh_administration()
+refresh_prescribing()
+refresh_microbiology()
 refresh_transfer()
-# refresh_procedures()
-# refresh_diagnosis()
-# refresh_episodes()
-# refresh_emergency()
-# refresh_icu_admissions()
-# refresh_icu_organsupport()
-# refresh_icu_medication()
-# refresh_icu_procedures()
-
+refresh_procedures()
+refresh_diagnosis()
+refresh_episodes()
+refresh_emergency()
+refresh_icu_admissions()
+refresh_icu_organsupport()
+refresh_icu_medication()
+refresh_icu_procedures()
+refresh_riskfactors()

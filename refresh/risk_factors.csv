@@ -1,0 +1,345 @@
+ICD10,Risk_Factor
+C64,Chronic renal disease
+C79.7,Chronic renal disease
+C81.1,Chronic neurological disease
+D35.0,Chronic renal disease
+D44.1,Chronic renal disease
+E10.0,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E10.1,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E10.2,Chronic renal disease
+E10.2,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E10.3,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E10.4,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E10.5,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E10.6,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E10.7,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E10.8,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E10.9,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E11.0,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E11.1,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E11.2,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E11.2,Chronic renal disease
+E11.3,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E11.4,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E11.5,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E11.6,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E11.7,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E11.8,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E11.9,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E12.1,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E12.2,Chronic renal disease
+E12.2,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E12.4,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E12.9,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E13.1,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E13.2,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E13.3,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E13.4,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E13.5,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E13.6,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E13.7,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E13.8,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E13.9,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E14.1,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E14.2,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E14.2,Chronic renal disease
+E14.3,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E14.4,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E14.5,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E14.6,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E14.9,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E16.2,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E23.2,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+E27.8,Chronic renal disease
+E27.9,Chronic renal disease
+E66.0,Obesity (clinically apparent/BMI)
+E66.1,Obesity (clinically apparent/BMI)
+E66.2,Obesity (clinically apparent/BMI)
+E66.8,Obesity (clinically apparent/BMI)
+E66.9,Obesity (clinically apparent/BMI)
+E78.2,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+F00.0,Chronic neurological disease
+F00.1,Chronic neurological disease
+F00.2,Chronic neurological disease
+F00.9,Chronic neurological disease
+G30.0,Chronic neurological disease
+G30.1,Chronic neurological disease
+G30.8,Chronic neurological disease
+G30.9,Chronic neurological disease
+G35,Chronic neurological disease
+G37.0,Chronic neurological disease
+G37.5,Chronic neurological disease
+G51.0,Chronic neurological disease
+G80.0,Chronic neurological disease
+G80.1,Chronic neurological disease
+G80.2,Chronic neurological disease
+G80.3,Chronic neurological disease
+G80.4,Chronic neurological disease
+G80.8,Chronic neurological disease
+G80.9,Chronic neurological disease
+G93.2,Hypertension
+H74.0,Chronic neurological disease
+H80.0,Chronic neurological disease
+H80.1,Chronic neurological disease
+H80.2,Chronic neurological disease
+H80.8,Chronic neurological disease
+H80.9,Chronic neurological disease
+I10,Hypertension
+I12.0,Chronic renal disease
+I15.0,Hypertension
+I15.1,Hypertension
+I15.2,Hypertension
+I15.8,Hypertension
+I15.9,Hypertension
+I27.0,Hypertension
+I27.2,Hypertension
+I67.2,Chronic neurological disease
+I70.0,Chronic neurological disease
+I70.00,Chronic neurological disease
+I70.01,Chronic neurological disease
+I70.1,Chronic neurological disease
+I70.1,Chronic renal disease
+I70.10,Chronic neurological disease
+I70.10,Chronic renal disease
+I70.11,Chronic neurological disease
+I70.2,Chronic neurological disease
+I70.20,Chronic neurological disease
+I70.21,Chronic neurological disease
+I70.8,Chronic neurological disease
+I70.80,Chronic neurological disease
+I70.81,Chronic neurological disease
+I70.9,Chronic neurological disease
+I70.90,Chronic neurological disease
+I70.91,Chronic neurological disease
+I72.2,Chronic renal disease
+J44.9,"Chronic respiratory disease, excluding asthma"
+J45.0,Asthma requiring medication
+J45.1,Asthma requiring medication
+J45.8,Asthma requiring medication
+J45.9,Asthma requiring medication
+K70.0,Chronic liver disease
+K70.1,Chronic liver disease
+K70.2,Chronic neurological disease
+K70.2,Chronic liver disease
+K70.3,Chronic liver disease
+K70.4,Chronic liver disease
+K70.9,Chronic liver disease
+K71.0,Chronic liver disease
+K71.1,Chronic liver disease
+K71.2,Chronic liver disease
+K71.4,Chronic liver disease
+K71.5,Chronic liver disease
+K71.6,Chronic liver disease
+K71.7,Chronic liver disease
+K71.8,Chronic liver disease
+K71.9,Chronic liver disease
+K72.0,Chronic liver disease
+K72.1,Chronic liver disease
+K72.9,Chronic liver disease
+K73.1,Chronic liver disease
+K73.8,Chronic liver disease
+K73.9,Chronic liver disease
+K74.0,Chronic liver disease
+K74.1,Chronic neurological disease
+K74.1,Chronic liver disease
+K74.2,Chronic neurological disease
+K74.2,Chronic liver disease
+K74.3,Chronic liver disease
+K74.4,Chronic liver disease
+K74.5,Chronic liver disease
+K74.6,Chronic liver disease
+K75.0,Chronic liver disease
+K75.2,Chronic liver disease
+K75.3,Chronic liver disease
+K75.4,Chronic liver disease
+K75.8,Chronic liver disease
+K75.9,Chronic liver disease
+K76.0,Chronic liver disease
+K76.1,Chronic liver disease
+K76.2,Chronic liver disease
+K76.3,Chronic liver disease
+K76.4,Chronic liver disease
+K76.5,Chronic liver disease
+K76.6,Chronic liver disease
+K76.6,Hypertension
+K76.7,Chronic renal disease
+K76.7,Chronic liver disease
+K76.8,Chronic liver disease
+K76.9,Chronic liver disease
+K77.0,Chronic liver disease
+K77.8,Chronic liver disease
+M34.0,Chronic neurological disease
+M34.8,Chronic neurological disease
+M34.9,Chronic neurological disease
+M35.5,Chronic neurological disease
+M86.9,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+N08.3,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+N13.2,Chronic renal disease
+N15.1,Chronic renal disease
+N15.8,Chronic renal disease
+N15.9,Chronic renal disease
+N16.4,Chronic renal disease
+N16.5,Chronic renal disease
+N17.0,Chronic renal disease
+N17.9,Chronic renal disease
+N18.1,Chronic renal disease
+N18.2,Chronic renal disease
+N18.3,Chronic renal disease
+N18.4,Chronic renal disease
+N18.5,Chronic renal disease
+N18.9,Chronic renal disease
+N19,Chronic renal disease
+N23,Chronic renal disease
+N25.1,Chronic renal disease
+N25.1,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+N25.8,Chronic renal disease
+N26,Chronic renal disease
+N27.0,Chronic renal disease
+N27.1,Chronic renal disease
+N27.9,Chronic renal disease
+N28.0,Chronic renal disease
+N28.1,Chronic renal disease
+N28.8,Chronic renal disease
+N28.9,Chronic renal disease
+N29.8,Chronic renal disease
+N60.3,Chronic neurological disease
+O00.0,Pregnancy (specify gestation on admission)
+O00.1,Pregnancy (specify gestation on admission)
+O00.2,Pregnancy (specify gestation on admission)
+O00.8,Pregnancy (specify gestation on admission)
+O00.9,Pregnancy (specify gestation on admission)
+O08.0,Pregnancy (specify gestation on admission)
+O08.1,Pregnancy (specify gestation on admission)
+O08.2,Pregnancy (specify gestation on admission)
+O08.4,Pregnancy (specify gestation on admission)
+O08.5,Pregnancy (specify gestation on admission)
+O08.6,Pregnancy (specify gestation on admission)
+O08.7,Pregnancy (specify gestation on admission)
+O08.8,Pregnancy (specify gestation on admission)
+O08.9,Pregnancy (specify gestation on admission)
+O10.0,Pregnancy (specify gestation on admission)
+O10.0,Hypertension
+O10.1,Pregnancy (specify gestation on admission)
+O10.2,Pregnancy (specify gestation on admission)
+O10.3,Pregnancy (specify gestation on admission)
+O10.4,Pregnancy (specify gestation on admission)
+O10.4,Hypertension
+O10.9,Pregnancy (specify gestation on admission)
+O10.9,Hypertension
+O11,Hypertension
+O13,Hypertension
+O13,Pregnancy (specify gestation on admission)
+O15.0,Pregnancy (specify gestation on admission)
+O16,Hypertension
+O20.0,Pregnancy (specify gestation on admission)
+O20.8,Pregnancy (specify gestation on admission)
+O20.9,Pregnancy (specify gestation on admission)
+O21.2,Pregnancy (specify gestation on admission)
+O21.8,Pregnancy (specify gestation on admission)
+O21.9,Pregnancy (specify gestation on admission)
+O22.0,Pregnancy (specify gestation on admission)
+O22.1,Pregnancy (specify gestation on admission)
+O22.2,Pregnancy (specify gestation on admission)
+O22.3,Pregnancy (specify gestation on admission)
+O22.4,Pregnancy (specify gestation on admission)
+O22.5,Pregnancy (specify gestation on admission)
+O22.8,Pregnancy (specify gestation on admission)
+O22.9,Pregnancy (specify gestation on admission)
+O23.0,Pregnancy (specify gestation on admission)
+O23.1,Pregnancy (specify gestation on admission)
+O23.2,Pregnancy (specify gestation on admission)
+O23.3,Pregnancy (specify gestation on admission)
+O23.4,Pregnancy (specify gestation on admission)
+O23.5,Pregnancy (specify gestation on admission)
+O23.9,Pregnancy (specify gestation on admission)
+O24.0,Pregnancy (specify gestation on admission)
+O24.0,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+O24.1,Pregnancy (specify gestation on admission)
+O24.1,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+O24.2,Pregnancy (specify gestation on admission)
+O24.2,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+O24.3,Pregnancy (specify gestation on admission)
+O24.3,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+O24.4,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+O24.4,Pregnancy (specify gestation on admission)
+O24.9,Pregnancy (specify gestation on admission)
+O24.9,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+O25,Pregnancy (specify gestation on admission)
+O26.0,Pregnancy (specify gestation on admission)
+O26.1,Pregnancy (specify gestation on admission)
+O26.2,Pregnancy (specify gestation on admission)
+O26.3,Pregnancy (specify gestation on admission)
+O26.6,Pregnancy (specify gestation on admission)
+O26.7,Pregnancy (specify gestation on admission)
+O26.8,Pregnancy (specify gestation on admission)
+O26.9,Pregnancy (specify gestation on admission)
+O29.1,Pregnancy (specify gestation on admission)
+O29.4,Pregnancy (specify gestation on admission)
+O29.5,Pregnancy (specify gestation on admission)
+O29.6,Pregnancy (specify gestation on admission)
+O29.8,Pregnancy (specify gestation on admission)
+O30.0,Pregnancy (specify gestation on admission)
+O30.1,Pregnancy (specify gestation on admission)
+O30.2,Pregnancy (specify gestation on admission)
+O31.1,Pregnancy (specify gestation on admission)
+O31.2,Pregnancy (specify gestation on admission)
+O36.7,Pregnancy (specify gestation on admission)
+O48,Pregnancy (specify gestation on admission)
+O94,Pregnancy (specify gestation on admission)
+O98.0,Pregnancy (specify gestation on admission)
+O98.1,Pregnancy (specify gestation on admission)
+O98.2,Pregnancy (specify gestation on admission)
+O98.3,Pregnancy (specify gestation on admission)
+O98.4,Pregnancy (specify gestation on admission)
+O98.5,Pregnancy (specify gestation on admission)
+O98.6,Pregnancy (specify gestation on admission)
+O98.7,Pregnancy (specify gestation on admission)
+O98.8,Pregnancy (specify gestation on admission)
+O98.9,Pregnancy (specify gestation on admission)
+O99.0,Pregnancy (specify gestation on admission)
+O99.1,Pregnancy (specify gestation on admission)
+O99.2,Pregnancy (specify gestation on admission)
+O99.3,Pregnancy (specify gestation on admission)
+O99.4,Pregnancy (specify gestation on admission)
+O99.5,Pregnancy (specify gestation on admission)
+O99.6,Pregnancy (specify gestation on admission)
+O99.7,Pregnancy (specify gestation on admission)
+O99.8,Pregnancy (specify gestation on admission)
+P01.5,Pregnancy (specify gestation on admission)
+P01.8,Pregnancy (specify gestation on admission)
+P27.8,"Chronic respiratory disease, excluding asthma"
+P27.9,"Chronic respiratory disease, excluding asthma"
+P29.2,Hypertension
+P70.0,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+P70.2,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+Q21.1,Chronic/congenital heart disease
+Q21.8,Chronic/congenital heart disease
+Q22.5,Chronic/congenital heart disease
+Q25.0,Chronic/congenital heart disease
+Q25.1,Chronic/congenital heart disease
+Q28.2,Chronic/congenital heart disease
+Q60.0,Chronic renal disease
+Q61.4,Chronic renal disease
+Q62.7,Chronic renal disease
+Q85.1,Chronic neurological disease
+R03.0,Hypertension
+Y43.4,Immunosuppression due to disease or treatment
+Z13.1,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+Z32.0,Pregnancy (specify gestation on admission)
+Z32.1,Pregnancy (specify gestation on admission)
+Z33,Pregnancy (specify gestation on admission)
+Z34.0,Pregnancy (specify gestation on admission)
+Z34.8,Pregnancy (specify gestation on admission)
+Z34.9,Pregnancy (specify gestation on admission)
+Z35.0,Pregnancy (specify gestation on admission)
+Z35.1,Pregnancy (specify gestation on admission)
+Z35.2,Pregnancy (specify gestation on admission)
+Z35.3,Pregnancy (specify gestation on admission)
+Z35.4,Pregnancy (specify gestation on admission)
+Z35.7,Pregnancy (specify gestation on admission)
+Z35.8,Pregnancy (specify gestation on admission)
+Z35.9,Pregnancy (specify gestation on admission)
+Z64.0,Pregnancy (specify gestation on admission)
+Z83.3,"Diabetes requiring insulin, oral hypoglycaemic drugs or diet controlled"
+Z87.5,Pregnancy (specify gestation on admission)
+Z99.2,Chronic renal disease
