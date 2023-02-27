@@ -4,6 +4,18 @@ from database import hic_conn, uhl_dwh_conn
 from environment import IDENTITY_API_KEY, IDENTITY_HOST
 from refresh import export
 
+
+SQL_CREATE_PARTICPANT = '''
+	IF NOT OBJECT_ID(N'participant', N'U') IS NOT NULL
+		BEGIN
+			CREATE TABLE participant (
+				participant_identifier VARCHAR(100) NOT NULL UNIQUE,
+				uhl_system_number VARCHAR(100) NOT NULL UNIQUE
+			)
+		END;
+'''
+
+
 SQL_CREATE_TEMP_TABLE = '''
     SET NOCOUNT ON;
 
@@ -136,6 +148,7 @@ def refresh_demographics():
 	print('refresh_demographics: extract demographics')
 
 	with hic_conn() as con:
+		con.execute(SQL_CREATE_PARTICPANT)
 		con.execute(SQL_DROP_TABLE)
 		con.execute(SQL_INSERT)
 		con.execute(SQL_ALTER_TABLE)
