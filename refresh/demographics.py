@@ -84,7 +84,7 @@ SQL_INSERT = '''
         FROM DWBRICCS.dbo.all_suspected_covid cv
         JOIN DWREPO.dbo.PATIENT p
             ON p.SYSTEM_NUMBER = cv.uhl_system_number
-		JOIN dwbriccs.dbo.temp_hic_smoking s
+		LEFT JOIN dwbriccs.dbo.temp_hic_smoking s
 			ON s.uhl_system_number = cv.uhl_system_number
         LEFT JOIN DWREPO_BASE.dbo.MF_POSTCODE_REFERENCE_WHO pc
             ON pc.UNIT_POSTCODE = p.Post_Code

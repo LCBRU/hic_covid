@@ -18,8 +18,8 @@ def upgrade(migrate_engine):
 
     t = Table("diagnosis", meta, autoload=True)
 
-    admission_datetime = Column("admission_datetime", DateTime)
-    admission_datetime.create(t)
+    # admission_datetime = Column("admission_datetime", DateTime)
+    # admission_datetime.create(t)
 
 
 def downgrade(migrate_engine):

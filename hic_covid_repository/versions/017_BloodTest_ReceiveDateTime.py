@@ -18,8 +18,8 @@ def upgrade(migrate_engine):
 
     t = Table("blood_test", meta, autoload=True)
 
-    admission_datetime = Column("receive_datetime", DateTime)
-    admission_datetime.create(t)
+    # admission_datetime = Column("receive_datetime", DateTime)
+    # admission_datetime.create(t)
 
 
 def downgrade(migrate_engine):

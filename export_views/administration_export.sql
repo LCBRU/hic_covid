@@ -10,8 +10,8 @@ SELECT
     a.dose_unit AS dose_unit,
     a.route_name AS route_name,
     a.form_name AS form_name
-FROM hic_covid.administration a
-JOIN hic_covid.demographics d
+FROM wh_hic_covid.administration a
+JOIN wh_hic_covid.demographics d
     ON d.uhl_system_number = a.uhl_system_number
-JOIN hic_covid.demographics_exports de
+JOIN wh_hic_covid.demographics_exports de
     ON de.Subject = d.participant_identifier

@@ -19,8 +19,8 @@ def upgrade(migrate_engine):
 
     t = Table("demographics", meta, autoload=True)
 
-    date_of_birth = Column("date_of_birth", Date)
-    date_of_birth.create(t)
+    # date_of_birth = Column("date_of_birth", Date)
+    # date_of_birth.create(t)
 
 
 def downgrade(migrate_engine):
