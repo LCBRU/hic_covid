@@ -1,3 +1,4 @@
+from itertools import groupby, count
 import requests
 from urllib.parse import urlencode, urlparse, urlunparse
 from database import hic_conn, uhl_dwh_conn
@@ -156,9 +157,11 @@ def refresh_demographics():
 
 		cur = con.cursor()
 		
-		new_participants = list(cur.execute(SQL_SELECT_MISSING_PARTICIPANT_IDS).fetchall())
+		i = count(1)
 
-		if len(new_participants) > 0:
+		for k, g in groupby(cur.execute(SQL_SELECT_MISSING_PARTICIPANT_IDS).fetchall(), lambda x: next(i) // 1000):
+			new_participants = list(g)
+			print(f'{k}: {len(new_participants)}')
 			ids = _allocate_ids(len(new_participants))
 
 			cur.executemany(
