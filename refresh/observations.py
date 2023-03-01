@@ -138,6 +138,9 @@ SQL_SELECT_EXPORT = '''
                 FROM    episodes e_
                 WHERE   e_.admission_date_time <= '20210630'
             )
+			AND a.observation_datetime <= '20210630'
+			AND a.observation_start_datetime <= '20210630'
+			AND a.observation_end_datetime <= '20210630'
     ;
 '''
 

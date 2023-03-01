@@ -114,6 +114,7 @@ SQL_SELECT_EXPORT = '''
                 FROM    episodes e_
                 WHERE   e_.admission_date_time <= '20210630'
             )
+            AND a.diagnosis_date_time <= '20210630'
     ;
 '''
 
