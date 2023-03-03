@@ -105,8 +105,8 @@ SQL_SELECT_EXPORT = '''
                 FROM    episodes e_
                 WHERE   e_.admission_date_time <= '20210630'
             )
-            AND a.arrival_date_time <= '20210630'
-            AND a.departure_date_time <= '20210630'
+            AND COALESCE(a.arrival_date_time, datefromparts(2021, 06, 30)) <=  datefromparts(2021, 06, 30)
+            AND COALESCE(a.departure_date_time, datefromparts(2021, 06, 30)) <=  datefromparts(2021, 06, 30)
     ;
 '''
 

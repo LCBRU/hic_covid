@@ -95,10 +95,10 @@ SQL_SELECT_EXPORT = '''
                 FROM    episodes e_
                 WHERE   e_.admission_date_time <= '20210630'
             )
-            AND a.hospital_admission_datetime <= '20210630'
-            AND a.hospital_discharge_datetime <= '20210630'
-            AND a.icu_admission_datetime <= '20210630'
-            AND a.icu_discharge_datetime <= '20210630'
+            AND COALESCE(a.hospital_admission_datetime, datefromparts(2021, 06, 30)) <=  datefromparts(2021, 06, 30)
+            AND COALESCE(a.hospital_discharge_datetime, datefromparts(2021, 06, 30)) <=  datefromparts(2021, 06, 30)
+            AND COALESCE(a.icu_admission_datetime, datefromparts(2021, 06, 30)) <=  datefromparts(2021, 06, 30)
+            AND COALESCE(a.icu_discharge_datetime, datefromparts(2021, 06, 30)) <=  datefromparts(2021, 06, 30)
     ;
 '''
 
