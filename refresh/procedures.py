@@ -21,7 +21,7 @@ SQL_INSERT = '''
             p.SYSTEM_NUMBER AS uhl_system_number,
             a.id AS spell_identifier,
             ce.ID AS episode_identifier,
-            proc.procedure_date AS procedure_date,
+            proc_.procedure_date AS procedure_date,
             proc_.PROCEDURE_NUMBER AS procedure_position,
             proc_.PROCEDURE_CODE AS procedure_code_opcs,
             opcs.PROCEDURE_DESCRIPTION AS procedure_name_opcs,
